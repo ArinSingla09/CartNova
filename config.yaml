@@ -1,0 +1,29 @@
+app:
+  name: CartNova
+  max_file_size_mb: 5
+  allowed_extensions:
+    - .pdf
+    - .jpg
+    - .jpeg
+    - .png
+
+azure:
+  blob:
+    raw_container: invoices-raw
+    reports_container: reports
+
+  queue:
+    name: invoice-processing
+
+  cosmos:
+    database: cartnova
+    container: invoices
+    partition_key: /supplier_gstin
+
+services:
+  supplier_url: http://127.0.0.1:5001
+
+processing:
+  max_attempts: 3
+  sas_expiry_minutes: 15
+  supplier_timeout_seconds: 3
